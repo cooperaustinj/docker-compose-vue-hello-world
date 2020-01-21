@@ -2,11 +2,11 @@ version: '3.7'
 services:
     service:
         container_name: vue-hello-world_service_prod
-        image: vue-hello-world_service:prod
+        image: 192.168.1.16:7878/vue-hello-world_service:prod
         build:
             target: prod-env
     client:
         container_name: vue-hello-world_client_prod
-        image: vue-hello-world_client:prod
+        image: 192.168.1.16:7878/vue-hello-world_client:prod
         build:
             target: prod-env

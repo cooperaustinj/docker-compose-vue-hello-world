@@ -14,7 +14,7 @@ FROM build-env as test-env
 RUN npm run test:unit
 
 FROM nginx:1.16.0-alpine as prod-env
-COPY --from=build /src/client/dist /usr/share/nginx/html
+COPY --from=build-env /src/client/dist /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 EXPOSE 8080
