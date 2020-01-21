@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+    service:
+        container_name: vue-hello-world_service_debug
+        image: vue-hello-world_service:debug
+        build:
+            context: service
+            target: debug-env
+        ports:
+            - '5000:80'
+    client:
+        container_name: vue-hello-world_client_debug
+        image: vue-hello-world_client:debug
+        build:
+            context: client
+            target: debug-env
+        ports:
+            - '8080:8080'
+        volumes:
+            - '/src/node_modules'

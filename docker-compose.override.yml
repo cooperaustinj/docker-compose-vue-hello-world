@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+    service:
+        volumes:
+            - ./service:/src
+    client:
+        volumes:
+            - ./client:/src
+        environment:
+            - CHOKIDAR_USEPOLLING=true
