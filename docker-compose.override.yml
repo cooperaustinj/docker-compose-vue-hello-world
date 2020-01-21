@@ -2,9 +2,9 @@ version: '3.7'
 services:
     service:
         volumes:
-            - ./service:/src
+            - ./:/src
     client:
         volumes:
-            - ./client:/src
+            - ./:/src
         environment:
             - CHOKIDAR_USEPOLLING=true

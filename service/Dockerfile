@@ -1,7 +1,7 @@
 # ---
 # Image containing the code and sdk
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS src-env
-WORKDIR /src
+WORKDIR /src/service
 
 COPY VueHelloWorld.sln ./
 COPY VueHelloWorld.Web/ ./VueHelloWorld.Web
@@ -12,19 +12,21 @@ RUN dotnet restore VueHelloWorld.sln
 # Image for debugging
 FROM src-env AS debug-env
 
-WORKDIR /src/VueHelloWorld.Web
+RUN apt-get update && \
+    apt-get install git
+WORKDIR /src/service/VueHelloWorld.Web
 ENTRYPOINT [ "dotnet", "watch", "run", "--urls", "http://0.0.0.0:80" ]
 
 # ---
 # Image to build and run tests
 FROM src-env as test-env
-WORKDIR /src
+WORKDIR /src/service
 RUN dotnet test VueHelloWorld.sln
 
 # ---
 # Image to build and publish release files
 FROM src-env as release-env
-WORKDIR /src
+WORKDIR /src/service
 RUN dotnet publish ./VueHelloWorld.Web/VueHelloWorld.Web.csproj -c Release -o /publish/web
 
 # ---
