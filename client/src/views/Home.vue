@@ -20,7 +20,7 @@ export default {
         return { msg: '' };
     },
     created() {
-        axios.get('http://localhost:5000/api').then(res => {
+        axios.get('http://192.168.1.16:7001/api').then(res => {
             this.msg = res.data.result;
         });
     }
